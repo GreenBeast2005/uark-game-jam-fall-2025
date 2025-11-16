@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnlweapqlijtq"]
+
+[ext_resource type="Script" uid="uid://c2rfxgp4f61o1" path="res://scripts/dialouge.gd" id="1_seejf"]
+
+[node name="Dialouge" type="Control" node_paths=PackedStringArray("dialogue_text_label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_seejf")
+dialogue_text_label = NodePath("RichTextLabel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 460.0
+offset_right = 1104.0
+offset_bottom = 629.0
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 472.0
+offset_right = 1087.0
+offset_bottom = 619.0

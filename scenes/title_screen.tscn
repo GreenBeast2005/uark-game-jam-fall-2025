@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://de2m14td4by4o"]
+
+[ext_resource type="Shader" uid="uid://cl11f8gr4iqay" path="res://shaders/title_backgrond.gdshader" id="1_fgkus"]
+[ext_resource type="Shader" uid="uid://bgmn1ygkr50d5" path="res://shaders/wavy_text.gdshader" id="2_sa3yf"]
+[ext_resource type="Script" uid="uid://cacmxek2s3132" path="res://scripts/start_level.gd" id="3_mgrm8"]
+[ext_resource type="PackedScene" uid="uid://cq6gmkradffkx" path="res://scenes/overworld.tscn" id="4_dc4i4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa3yf"]
+shader = ExtResource("1_fgkus")
+shader_parameter/speed = 0.1
+shader_parameter/pixelation = 8.0
+shader_parameter/zoom = 2.0
+shader_parameter/gradient_pixelation = 0.2000000095
+shader_parameter/background_threshold = 0.0
+shader_parameter/color_low_threshold = 0.0
+shader_parameter/color_mid_threshold = 0.2000000095
+shader_parameter/color_low = Color(0.01, 0.41, 0.51, 1)
+shader_parameter/color_mid = Color(0.5, 0.1, 0.3, 1)
+shader_parameter/color_high = Color(1, 1, 1, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s4lrb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4lrb"]
+shader = ExtResource("2_sa3yf")
+shader_parameter/text_color = Color(1, 1, 1, 1)
+shader_parameter/warp_frequency = 10.0
+shader_parameter/warp_amplitude = 5.0
+shader_parameter/warp_speed = 2.0
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_sa3yf")
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("CanvasTexture_s4lrb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_s4lrb")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 212.0
+offset_top = 80.0
+offset_right = 925.0
+offset_bottom = 236.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Fate Determined"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGame" type="Button" parent="."]
+offset_left = 428.0
+offset_top = 392.0
+offset_right = 683.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 24
+text = "Start Game"
+script = ExtResource("3_mgrm8")
+scene_to_load = ExtResource("4_dc4i4")

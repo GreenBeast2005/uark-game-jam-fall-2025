@@ -1,14 +1,17 @@
 extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
+
+@export var dialogue: DialogueResource
 var direction: Vector2 = Vector2.ZERO
 
 # Player movement constants
-const SPEED = 300.0
-const ACCELERATION = 1500.0
-const FRICTION = 1200.0
+@export var SPEED = 300.0
+@export var ACCELERATION = 1500.0
+@export var FRICTION = 1200.0
 
 func _ready() -> void:
+	add_to_group("player")
 	animation_tree.active = true
 
 func _physics_process(delta):
@@ -34,7 +37,12 @@ func _physics_process(delta):
 
 
 func _process(delta: float) -> void:
-	direction = (get_global_mouse_position() - global_position).normalized()
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		camera.global_position = global_position
+
+	if velocity != Vector2.ZERO:
+		direction = velocity.normalized()
 	_update_animation_parametsers()
 
 func _update_animation_parametsers() -> void:
@@ -45,5 +53,6 @@ func _update_animation_parametsers() -> void:
 		animation_tree.set("parameters/conditions/idle", false)
 		animation_tree.set("parameters/conditions/is_walking", true)
 
-	animation_tree.set("parameters/Idle/blend_position", direction)
-	animation_tree.set("parameters/Walk/blend_position", direction)
+	if direction != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", direction)
+		animation_tree.set("parameters/Walk/blend_position", direction)

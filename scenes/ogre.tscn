@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqcy8w02vghl3"]
+
+[ext_resource type="Script" uid="uid://qjxpvg6ibv6o" path="res://scripts/ogre.gd" id="1_v5ei5"]
+[ext_resource type="Texture2D" uid="uid://brlja43ptkh8t" path="res://assets/OgreBoss.png" id="2_18hxh"]
+[ext_resource type="PackedScene" uid="uid://drk1p8bd1ia51" path="res://scenes/end_scene.tscn" id="2_offou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_offou"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_rw5dj"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, 0), Vector2i(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_8tc31"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c1ba8"]
+resource_name = "attack"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(1, 1), Vector2i(1, 2), Vector2i(1, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8uni"]
+_data = {
+&"RESET": SubResource("Animation_8tc31"),
+&"attack": SubResource("Animation_c1ba8"),
+&"walk": SubResource("Animation_rw5dj")
+}
+
+[node name="Ogre" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_v5ei5")
+death_scene = ExtResource("2_offou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_offou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_18hxh")
+hframes = 2
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u8uni")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true

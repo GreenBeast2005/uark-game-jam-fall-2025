@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://qyq822npst3t"]
+
+[ext_resource type="Script" uid="uid://cs48n2qo3371y" path="res://scripts/dialouge_click.gd" id="1_l2rhu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrv4n"]
+size = Vector2(8, 8)
+
+[node name="DialougeClick" type="Area2D"]
+script = ExtResource("1_l2rhu")
+dialogue_texts = Array[String](["First Text to send"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jrv4n")

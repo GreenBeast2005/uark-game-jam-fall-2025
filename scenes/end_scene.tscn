@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://drk1p8bd1ia51"]
+
+[ext_resource type="Shader" uid="uid://cl11f8gr4iqay" path="res://shaders/title_backgrond.gdshader" id="1_nld2j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7dif"]
+shader = ExtResource("1_nld2j")
+shader_parameter/speed = 0.1
+shader_parameter/pixelation = 8.0
+shader_parameter/zoom = 2.0
+shader_parameter/gradient_pixelation = 0.2
+shader_parameter/background_threshold = 0.0
+shader_parameter/color_low_threshold = 0.0
+shader_parameter/color_mid_threshold = 0.2000000095
+shader_parameter/color_low = Color(1.1488971e-05, 0.0017823452, 0.0028165092, 1)
+shader_parameter/color_mid = Color(1, 0.101960786, 0.3019608, 1)
+shader_parameter/color_high = Color(1, 1, 1, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_s7dif")
+offset_right = 1149.0
+offset_bottom = 644.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 241.0
+offset_top = 221.0
+offset_right = 937.0
+offset_bottom = 389.0
+theme_override_font_sizes/normal_font_size = 50
+text = "FATE SEALED"
+horizontal_alignment = 1
+vertical_alignment = 1
